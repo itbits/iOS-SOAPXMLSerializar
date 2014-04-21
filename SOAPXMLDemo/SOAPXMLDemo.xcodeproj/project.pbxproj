@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D7C0646F19053AE300E82F7C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C0646E19053AE300E82F7C /* Foundation.framework */; };
+		D7C0647119053AE300E82F7C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C0647019053AE300E82F7C /* CoreGraphics.framework */; };
+		D7C0647319053AE300E82F7C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C0647219053AE300E82F7C /* UIKit.framework */; };
+		D7C0647919053AE400E82F7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D7C0647719053AE400E82F7C /* InfoPlist.strings */; };
+		D7C0647B19053AE400E82F7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C0647A19053AE400E82F7C /* main.m */; };
+		D7C0647F19053AE400E82F7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C0647E19053AE400E82F7C /* AppDelegate.m */; };
+		D7C0648119053AE400E82F7C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7C0648019053AE400E82F7C /* Images.xcassets */; };
+		D7C0648819053AE400E82F7C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C0648719053AE400E82F7C /* XCTest.framework */; };
+		D7C0648919053AE400E82F7C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C0646E19053AE300E82F7C /* Foundation.framework */; };
+		D7C0648A19053AE400E82F7C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C0647219053AE300E82F7C /* UIKit.framework */; };
+		D7C0649219053AE400E82F7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D7C0649019053AE400E82F7C /* InfoPlist.strings */; };
+		D7C0649419053AE400E82F7C /* SOAPXMLDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C0649319053AE400E82F7C /* SOAPXMLDemoTests.m */; };
+		D7C064BB19053B1700E82F7C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D7C0649F19053B1700E82F7C /* LICENSE */; };
+		D7C064BC19053B1700E82F7C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D7C064A019053B1700E82F7C /* README.md */; };
+		D7C064BD19053B1700E82F7C /* CoreURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064A419053B1700E82F7C /* CoreURLConnection.m */; };
+		D7C064BE19053B1700E82F7C /* CoreWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064A619053B1700E82F7C /* CoreWebService.m */; };
+		D7C064BF19053B1700E82F7C /* EVESOAPService.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064A919053B1700E82F7C /* EVESOAPService.m */; };
+		D7C064C019053B1700E82F7C /* SOAPFault.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064AB19053B1700E82F7C /* SOAPFault.m */; };
+		D7C064C219053B1700E82F7C /* XMLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064AF19053B1700E82F7C /* XMLContext.m */; };
+		D7C064C319053B1700E82F7C /* XMLContextConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064B119053B1700E82F7C /* XMLContextConfiguration.m */; };
+		D7C064C419053B1700E82F7C /* XMLMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064B319053B1700E82F7C /* XMLMapping.m */; };
+		D7C064C519053B1700E82F7C /* XMLMarshaller.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064B519053B1700E82F7C /* XMLMarshaller.m */; };
+		D7C064C619053B1700E82F7C /* XMLTypeMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064B719053B1700E82F7C /* XMLTypeMapper.m */; };
+		D7C064C719053B1700E82F7C /* XMLUnmarshaller.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C064B919053B1700E82F7C /* XMLUnmarshaller.m */; };
+		D7C064C919053C5700E82F7C /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C064C819053C5700E82F7C /* libxml2.2.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D7C0648B19053AE400E82F7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7C0646319053AE300E82F7C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7C0646A19053AE300E82F7C;
+			remoteInfo = SOAPXMLDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D7C0646B19053AE300E82F7C /* SOAPXMLDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SOAPXMLDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7C0646E19053AE300E82F7C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D7C0647019053AE300E82F7C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D7C0647219053AE300E82F7C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D7C0647619053AE400E82F7C /* SOAPXMLDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SOAPXMLDemo-Info.plist"; sourceTree = "<group>"; };
+		D7C0647819053AE400E82F7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D7C0647A19053AE400E82F7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D7C0647C19053AE400E82F7C /* SOAPXMLDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SOAPXMLDemo-Prefix.pch"; sourceTree = "<group>"; };
+		D7C0647D19053AE400E82F7C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D7C0647E19053AE400E82F7C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D7C0648019053AE400E82F7C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D7C0648619053AE400E82F7C /* SOAPXMLDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SOAPXMLDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7C0648719053AE400E82F7C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D7C0648F19053AE400E82F7C /* SOAPXMLDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SOAPXMLDemoTests-Info.plist"; sourceTree = "<group>"; };
+		D7C0649119053AE400E82F7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D7C0649319053AE400E82F7C /* SOAPXMLDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOAPXMLDemoTests.m; sourceTree = "<group>"; };
+		D7C0649F19053B1700E82F7C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D7C064A019053B1700E82F7C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		D7C064A319053B1700E82F7C /* CoreURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreURLConnection.h; sourceTree = "<group>"; };
+		D7C064A419053B1700E82F7C /* CoreURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreURLConnection.m; sourceTree = "<group>"; };
+		D7C064A519053B1700E82F7C /* CoreWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreWebService.h; sourceTree = "<group>"; };
+		D7C064A619053B1700E82F7C /* CoreWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreWebService.m; sourceTree = "<group>"; };
+		D7C064A719053B1700E82F7C /* EventoServerAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventoServerAPIConstants.h; sourceTree = "<group>"; };
+		D7C064A819053B1700E82F7C /* EVESOAPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVESOAPService.h; sourceTree = "<group>"; };
+		D7C064A919053B1700E82F7C /* EVESOAPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVESOAPService.m; sourceTree = "<group>"; };
+		D7C064AA19053B1700E82F7C /* SOAPFault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPFault.h; sourceTree = "<group>"; };
+		D7C064AB19053B1700E82F7C /* SOAPFault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPFault.m; sourceTree = "<group>"; };
+		D7C064AE19053B1700E82F7C /* XMLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLContext.h; sourceTree = "<group>"; };
+		D7C064AF19053B1700E82F7C /* XMLContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLContext.m; sourceTree = "<group>"; };
+		D7C064B019053B1700E82F7C /* XMLContextConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLContextConfiguration.h; sourceTree = "<group>"; };
+		D7C064B119053B1700E82F7C /* XMLContextConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLContextConfiguration.m; sourceTree = "<group>"; };
+		D7C064B219053B1700E82F7C /* XMLMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLMapping.h; sourceTree = "<group>"; };
+		D7C064B319053B1700E82F7C /* XMLMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLMapping.m; sourceTree = "<group>"; };
+		D7C064B419053B1700E82F7C /* XMLMarshaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLMarshaller.h; sourceTree = "<group>"; };
+		D7C064B519053B1700E82F7C /* XMLMarshaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLMarshaller.m; sourceTree = "<group>"; };
+		D7C064B619053B1700E82F7C /* XMLTypeMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLTypeMapper.h; sourceTree = "<group>"; };
+		D7C064B719053B1700E82F7C /* XMLTypeMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLTypeMapper.m; sourceTree = "<group>"; };
+		D7C064B819053B1700E82F7C /* XMLUnmarshaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLUnmarshaller.h; sourceTree = "<group>"; };
+		D7C064B919053B1700E82F7C /* XMLUnmarshaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLUnmarshaller.m; sourceTree = "<group>"; };
+		D7C064C819053C5700E82F7C /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D7C0646819053AE300E82F7C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C064C919053C5700E82F7C /* libxml2.2.dylib in Frameworks */,
+				D7C0647119053AE300E82F7C /* CoreGraphics.framework in Frameworks */,
+				D7C0647319053AE300E82F7C /* UIKit.framework in Frameworks */,
+				D7C0646F19053AE300E82F7C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7C0648319053AE400E82F7C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C0648819053AE400E82F7C /* XCTest.framework in Frameworks */,
+				D7C0648A19053AE400E82F7C /* UIKit.framework in Frameworks */,
+				D7C0648919053AE400E82F7C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D7C0646219053AE300E82F7C = {
+			isa = PBXGroup;
+			children = (
+				D7C0649D19053B1700E82F7C /* iOS-SOAPXMLSerializar */,
+				D7C0647419053AE300E82F7C /* SOAPXMLDemo */,
+				D7C0648D19053AE400E82F7C /* SOAPXMLDemoTests */,
+				D7C0646D19053AE300E82F7C /* Frameworks */,
+				D7C0646C19053AE300E82F7C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D7C0646C19053AE300E82F7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D7C0646B19053AE300E82F7C /* SOAPXMLDemo.app */,
+				D7C0648619053AE400E82F7C /* SOAPXMLDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D7C0646D19053AE300E82F7C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D7C064C819053C5700E82F7C /* libxml2.2.dylib */,
+				D7C0646E19053AE300E82F7C /* Foundation.framework */,
+				D7C0647019053AE300E82F7C /* CoreGraphics.framework */,
+				D7C0647219053AE300E82F7C /* UIKit.framework */,
+				D7C0648719053AE400E82F7C /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D7C0647419053AE300E82F7C /* SOAPXMLDemo */ = {
+			isa = PBXGroup;
+			children = (
+				D7C0647D19053AE400E82F7C /* AppDelegate.h */,
+				D7C0647E19053AE400E82F7C /* AppDelegate.m */,
+				D7C0648019053AE400E82F7C /* Images.xcassets */,
+				D7C0647519053AE400E82F7C /* Supporting Files */,
+			);
+			path = SOAPXMLDemo;
+			sourceTree = "<group>";
+		};
+		D7C0647519053AE400E82F7C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D7C0647619053AE400E82F7C /* SOAPXMLDemo-Info.plist */,
+				D7C0647719053AE400E82F7C /* InfoPlist.strings */,
+				D7C0647A19053AE400E82F7C /* main.m */,
+				D7C0647C19053AE400E82F7C /* SOAPXMLDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D7C0648D19053AE400E82F7C /* SOAPXMLDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				D7C0649319053AE400E82F7C /* SOAPXMLDemoTests.m */,
+				D7C0648E19053AE400E82F7C /* Supporting Files */,
+			);
+			path = SOAPXMLDemoTests;
+			sourceTree = "<group>";
+		};
+		D7C0648E19053AE400E82F7C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D7C0648F19053AE400E82F7C /* SOAPXMLDemoTests-Info.plist */,
+				D7C0649019053AE400E82F7C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D7C0649D19053B1700E82F7C /* iOS-SOAPXMLSerializar */ = {
+			isa = PBXGroup;
+			children = (
+				D7C0649F19053B1700E82F7C /* LICENSE */,
+				D7C064A019053B1700E82F7C /* README.md */,
+				D7C064A119053B1700E82F7C /* ServerAPI */,
+			);
+			name = "iOS-SOAPXMLSerializar";
+			path = "../../iOS-SOAPXMLSerializar";
+			sourceTree = "<group>";
+		};
+		D7C064A119053B1700E82F7C /* ServerAPI */ = {
+			isa = PBXGroup;
+			children = (
+				D7C064A219053B1700E82F7C /* SOAP */,
+				D7C064AC19053B1700E82F7C /* XMLParser */,
+			);
+			path = ServerAPI;
+			sourceTree = "<group>";
+		};
+		D7C064A219053B1700E82F7C /* SOAP */ = {
+			isa = PBXGroup;
+			children = (
+				D7C064A319053B1700E82F7C /* CoreURLConnection.h */,
+				D7C064A419053B1700E82F7C /* CoreURLConnection.m */,
+				D7C064A519053B1700E82F7C /* CoreWebService.h */,
+				D7C064A619053B1700E82F7C /* CoreWebService.m */,
+				D7C064A719053B1700E82F7C /* EventoServerAPIConstants.h */,
+				D7C064A819053B1700E82F7C /* EVESOAPService.h */,
+				D7C064A919053B1700E82F7C /* EVESOAPService.m */,
+				D7C064AA19053B1700E82F7C /* SOAPFault.h */,
+				D7C064AB19053B1700E82F7C /* SOAPFault.m */,
+			);
+			path = SOAP;
+			sourceTree = "<group>";
+		};
+		D7C064AC19053B1700E82F7C /* XMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				D7C064AE19053B1700E82F7C /* XMLContext.h */,
+				D7C064AF19053B1700E82F7C /* XMLContext.m */,
+				D7C064B019053B1700E82F7C /* XMLContextConfiguration.h */,
+				D7C064B119053B1700E82F7C /* XMLContextConfiguration.m */,
+				D7C064B219053B1700E82F7C /* XMLMapping.h */,
+				D7C064B319053B1700E82F7C /* XMLMapping.m */,
+				D7C064B419053B1700E82F7C /* XMLMarshaller.h */,
+				D7C064B519053B1700E82F7C /* XMLMarshaller.m */,
+				D7C064B619053B1700E82F7C /* XMLTypeMapper.h */,
+				D7C064B719053B1700E82F7C /* XMLTypeMapper.m */,
+				D7C064B819053B1700E82F7C /* XMLUnmarshaller.h */,
+				D7C064B919053B1700E82F7C /* XMLUnmarshaller.m */,
+			);
+			path = XMLParser;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D7C0646A19053AE300E82F7C /* SOAPXMLDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7C0649719053AE400E82F7C /* Build configuration list for PBXNativeTarget "SOAPXMLDemo" */;
+			buildPhases = (
+				D7C0646719053AE300E82F7C /* Sources */,
+				D7C0646819053AE300E82F7C /* Frameworks */,
+				D7C0646919053AE300E82F7C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SOAPXMLDemo;
+			productName = SOAPXMLDemo;
+			productReference = D7C0646B19053AE300E82F7C /* SOAPXMLDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D7C0648519053AE400E82F7C /* SOAPXMLDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7C0649A19053AE400E82F7C /* Build configuration list for PBXNativeTarget "SOAPXMLDemoTests" */;
+			buildPhases = (
+				D7C0648219053AE400E82F7C /* Sources */,
+				D7C0648319053AE400E82F7C /* Frameworks */,
+				D7C0648419053AE400E82F7C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7C0648C19053AE400E82F7C /* PBXTargetDependency */,
+			);
+			name = SOAPXMLDemoTests;
+			productName = SOAPXMLDemoTests;
+			productReference = D7C0648619053AE400E82F7C /* SOAPXMLDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D7C0646319053AE300E82F7C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Muhammad Imran";
+				TargetAttributes = {
+					D7C0648519053AE400E82F7C = {
+						TestTargetID = D7C0646A19053AE300E82F7C;
+					};
+				};
+			};
+			buildConfigurationList = D7C0646619053AE300E82F7C /* Build configuration list for PBXProject "SOAPXMLDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D7C0646219053AE300E82F7C;
+			productRefGroup = D7C0646C19053AE300E82F7C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D7C0646A19053AE300E82F7C /* SOAPXMLDemo */,
+				D7C0648519053AE400E82F7C /* SOAPXMLDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D7C0646919053AE300E82F7C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C0647919053AE400E82F7C /* InfoPlist.strings in Resources */,
+				D7C064BC19053B1700E82F7C /* README.md in Resources */,
+				D7C064BB19053B1700E82F7C /* LICENSE in Resources */,
+				D7C0648119053AE400E82F7C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7C0648419053AE400E82F7C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C0649219053AE400E82F7C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D7C0646719053AE300E82F7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C064C419053B1700E82F7C /* XMLMapping.m in Sources */,
+				D7C0647F19053AE400E82F7C /* AppDelegate.m in Sources */,
+				D7C064BD19053B1700E82F7C /* CoreURLConnection.m in Sources */,
+				D7C064C719053B1700E82F7C /* XMLUnmarshaller.m in Sources */,
+				D7C064C319053B1700E82F7C /* XMLContextConfiguration.m in Sources */,
+				D7C064C519053B1700E82F7C /* XMLMarshaller.m in Sources */,
+				D7C0647B19053AE400E82F7C /* main.m in Sources */,
+				D7C064C619053B1700E82F7C /* XMLTypeMapper.m in Sources */,
+				D7C064C219053B1700E82F7C /* XMLContext.m in Sources */,
+				D7C064BF19053B1700E82F7C /* EVESOAPService.m in Sources */,
+				D7C064BE19053B1700E82F7C /* CoreWebService.m in Sources */,
+				D7C064C019053B1700E82F7C /* SOAPFault.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7C0648219053AE400E82F7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C0649419053AE400E82F7C /* SOAPXMLDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D7C0648C19053AE400E82F7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7C0646A19053AE300E82F7C /* SOAPXMLDemo */;
+			targetProxy = D7C0648B19053AE400E82F7C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D7C0647719053AE400E82F7C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7C0647819053AE400E82F7C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D7C0649019053AE400E82F7C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7C0649119053AE400E82F7C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D7C0649519053AE400E82F7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D7C0649619053AE400E82F7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D7C0649819053AE400E82F7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOAPXMLDemo/SOAPXMLDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "SOAPXMLDemo/SOAPXMLDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D7C0649919053AE400E82F7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOAPXMLDemo/SOAPXMLDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "SOAPXMLDemo/SOAPXMLDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D7C0649B19053AE400E82F7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SOAPXMLDemo.app/SOAPXMLDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOAPXMLDemo/SOAPXMLDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SOAPXMLDemoTests/SOAPXMLDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D7C0649C19053AE400E82F7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SOAPXMLDemo.app/SOAPXMLDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOAPXMLDemo/SOAPXMLDemo-Prefix.pch";
+				INFOPLIST_FILE = "SOAPXMLDemoTests/SOAPXMLDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D7C0646619053AE300E82F7C /* Build configuration list for PBXProject "SOAPXMLDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7C0649519053AE400E82F7C /* Debug */,
+				D7C0649619053AE400E82F7C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7C0649719053AE400E82F7C /* Build configuration list for PBXNativeTarget "SOAPXMLDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7C0649819053AE400E82F7C /* Debug */,
+				D7C0649919053AE400E82F7C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D7C0649A19053AE400E82F7C /* Build configuration list for PBXNativeTarget "SOAPXMLDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7C0649B19053AE400E82F7C /* Debug */,
+				D7C0649C19053AE400E82F7C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D7C0646319053AE300E82F7C /* Project object */;
+}
