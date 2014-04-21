@@ -5,7 +5,7 @@ This code will serialise and de serialise SOAP Base XMLs
 
 Sample Map File:
 =====================
-
+```xml
 <xml-mapping>
     <root-node>Name of root node</root-node>
     <node-mappings>
@@ -44,4 +44,4 @@ Sample Map File:
    		</node-mapping>
 	</node-mappings>
 </xml-mapping>
-
+```
