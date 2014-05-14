@@ -6,6 +6,8 @@
 #import "XMLUnmarshaller.h"
 #import "EventoServerAPIConstants.h"
 #import <UIKit/UIDevice.h>
+#import "SOAPFault.h"
+#import "EVEError.h"
 
 @implementation CoreWebService
 
@@ -63,16 +65,13 @@
     [self.connection cancel];
 }
 
-- (BOOL)isErrorResponse:(id)xmlObject {
-    return (NO);
+- (void)didReceiveError:(EVEError *)error{
 }
 
-- (void)didReceiveError:(id)xmlObject {
-}
 
 #pragma mark CoreURLConnectionDelegate
 
-- (void)connection:(CoreURLConnection *)c didReceiveData:(NSData *)data {
+- (id)deserializeXMLData:(NSData*)data {
     // deserialize the data as XML, if any data is present
     id xmlObject = nil;
     if (data != nil && [data length] > 0) {
@@ -80,7 +79,7 @@
         XMLUnmarshaller *unmarshaller = [[XMLContext context] createUnmarshaller];
         //Remove Extra SOAP tags from XML, this will be helpful for simplifing XML maps
         NSString *soapString = [self removeExtraSOAPTags:[[NSString alloc] initWithData:data
-                                                                encoding:NSUTF8StringEncoding]];
+                                                                               encoding:NSUTF8StringEncoding]];
         // check to see if we have a manually configured root node...
         if (responseClass != NULL) {
             xmlObject = [unmarshaller unmarshal:soapString
@@ -91,16 +90,33 @@
         }
     }
     // if this XML response represents an error
-    if ([self isErrorResponse:xmlObject]) {
+
+    return xmlObject;
+}
+
+- (void)connection:(CoreURLConnection *)c didReceiveData:(NSData *)data {
+
+    id xmlObject = [self deserializeXMLData:data];
+
+    if ([xmlObject isKindOfClass:[SOAPFault class]]) {
         // if the delegate responds to the handling selector, see if it wants to handle it
         BOOL errorHandled = NO;
+
+        EVEError *eveError = [[EVEError alloc] init];
+
+        eveError .soapFault = xmlObject;
+         int statusCode = [[self.responseHeader objectForKey:@"statusCode"] intValue];
+        eveError.statusCode = statusCode;
+
         if ([delegate respondsToSelector:@selector(soapService:didReceiveError:)]) {
-            errorHandled = [delegate soapService:self didReceiveError:xmlObject];
+            errorHandled = [delegate soapService:self didReceiveError:eveError];
         }
         // if the error hasn't been handled, allow the subclass to handle it
         if (!errorHandled) {
             [self didReceiveError:xmlObject];
         }
+
+        [EVECacheDiskHandler purgeDiskCacheForKey:c.cacheKey];
     }
     // otherwise, we got a normal response
     else {
@@ -125,10 +141,12 @@
     // For handling the Page not found or redirection error we have to get the status code from responce header.
     int statusCode = [[responseH objectForKey:@"statusCode"] intValue];
     [self setResponseHeader:responseH];
+    EVEError *error = [[EVEError alloc] init];
+    error.statusCode = statusCode;
     if (statusCode == 404) {
         BOOL errorHandled = NO;
         if ([delegate respondsToSelector:@selector(soapService:didReceiveError:)]) {
-            errorHandled = [delegate soapService:self didReceiveError:nil];
+            errorHandled = [delegate soapService:self didReceiveError:error];
         }
         if (!errorHandled) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kCommonUnableToAccessServices
@@ -140,5 +158,56 @@
         [self.delegate soapService:self didReceiveResponseHeader:responseH];
     }
 }
+
+
+- (void)connection:(CoreURLConnection *)con didDidReceiveCachedData:(NSData *)data {
+    if (data == nil || [data length] <= 0) {
+        [EVECacheDiskHandler purgeDiskCacheForKey:con.cacheKey];
+        return;
+    }
+
+    id xmlObject = [self deserializeXMLData:data];
+    if (xmlObject == nil) {
+        [EVECacheDiskHandler purgeDiskCacheForKey:con.cacheKey];
+        return;
+    }
+
+    // otherwise, we got a normal response
+    if ([delegate respondsToSelector:@selector(soapService:didDidReceiveCached:)]) {
+        //send the delegate message
+        [delegate soapService:self didDidReceiveCached:xmlObject];
+    }
+
+
+}
+- (void)connection:(CoreURLConnection *)connection didFinishCachedStreaming:(NSString *)filePath {
+    if ([delegate respondsToSelector:@selector(soapService:didFinishCachedStreaming:)]) {
+        [delegate soapService:self didFinishStreaming:filePath];
+    }
+}
+- (void)connection:(CoreURLConnection *)connection didUpdateDownloadProgress:(EVEDataDownloadProgress*)progress {
+    if ([delegate respondsToSelector:@selector(soapService:didUpdateDownloadProgress:)]) {
+        [delegate soapService:self didUpdateDownloadProgress:progress];
+    }
+
+}
+
+- (void)connection:(CoreURLConnection *)connection didFailWithError:(NSError *)error {
+	// post a notification that we can't reach the service
+
+    EVEError *myError = [[EVEError alloc] init];
+    myError.statusCode = (int)[error code];
+    BOOL errorHandled = NO;
+
+    if ([delegate respondsToSelector:@selector(soapService:didReceiveError:)]) {
+        errorHandled = [delegate soapService:self didReceiveError:myError];
+    }
+    if (!errorHandled) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCommonUnableToAccessServices
+                                                            object:nil];
+    }
+
+}
+
 
 @end

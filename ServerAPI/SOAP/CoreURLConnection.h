@@ -1,13 +1,31 @@
 /*Created by Muhammad Imran on 4/6/14. */
 
 #import <Foundation/Foundation.h>
+#import "EVECacheDiskHandler.h"
+#import "EVEDataDownloadProgress.h"
 
+/**
+ *  We will use this enum to set this cache mode
+ */
 typedef enum {
+    /**
+     *  The response will not be cached
+     */
     EVEURLConnectionCacheModeNone,
-    EVEURLConnectionCacheModeApplication
+
+    /**
+     *  We will cache response in memory.
+     */
+    EVEURLConnectionCacheModeMemory,
+
+    /**
+     *  We will cache response on disk.
+     */
+    EVEURLConnectionCacheModeDisk
 } EVEURLConnectionCacheMode;
 
 @class CoreURLConnection;
+
 
 @protocol CoreURLConnectionDelegate < NSObject >
 
@@ -18,6 +36,10 @@ typedef enum {
 - (void)connection:(CoreURLConnection *)connection didReceiveData:(NSData *)data;
 - (void)connection:(CoreURLConnection *)connection didFailWithError:(NSError *)error;
 - (void)connection:(CoreURLConnection *)connection didReceiveResponseHeader:(NSDictionary *)responseHeader;
+- (void)connection:(CoreURLConnection *)connection didDidReceiveCachedData:(NSData *)data;
+- (void)connection:(CoreURLConnection *)connection didFinishCachedStreaming:(NSString *)filePath;
+- (void)connection:(CoreURLConnection *)connection didUpdateDownloadProgress:(EVEDataDownloadProgress*)progress;
+
 
 @end
 
@@ -35,11 +57,13 @@ typedef enum {
 @property (nonatomic, strong) NSString *filePath;
 @property (nonatomic, strong) NSFileHandle *file;
 @property (nonatomic, assign) EVEURLConnectionCacheMode cacheMode;
+@property (nonatomic, strong) NSString *cacheKey;
+@property (nonatomic, strong) EVEDataDownloadProgress *progress;
 
 - (id)initWithDelegate:(id<CoreURLConnectionDelegate>)delegate url:(NSString *)url;
 - (BOOL)active;
 
-- (void)invokeSOAPRequest:(NSURLRequest*)soapRequest method:(NSString *)method queryString:(NSString *)query content:(NSData *)content;
+- (void)invokeSOAPRequest:(NSURLRequest*)soapRequest cacheKey:(NSString *)cacheKey queryString:(NSString *)query;
 - (void)cancel;
 - (void)connectionDidFinishLoading:(NSURLConnection *)c;
 

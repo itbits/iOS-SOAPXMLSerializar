@@ -27,9 +27,12 @@
 }
 
 - (void)registerMapping:(XMLMapping *)mapping {
-    NSLog(@"ILXML: Registering mapping for root node \"%@\", class \"%@\"", [mapping rootNode], [mapping className]);
-    
-    // only store the mappings by root-node for those that support it.  those that don't are 
+    if (kLogingEnabled) {
+        NSLog(@"ILXML: Registering mapping for root node \"%@\", class \"%@\"", [mapping rootNode], [mapping className]);
+    }
+
+
+    // only store the mappings by root-node for those that support it.  those that don't are
     // typically classes that are referenced only and are never used as the root.
     if ([mapping rootNode] != nil) {
         [self.mapsByRootNode setObject:mapping

@@ -1,6 +1,7 @@
 /*Created by Muhammad Imran on 4/6/14. */
 
 #import <Foundation/Foundation.h>
+#import "EventoServerAPIConstants.h"
 
 @class XMLTypeMapper;
 @class XMLMapping;

@@ -29,12 +29,4 @@
  */
 @property (nonatomic, strong) NSString *faultCode;
 
-/*!
- @discussion 
- This method will be used to check if we get error in SOAP response
- @result
- T/F true is the response is error
- */
-- (BOOL)isErrorResponse;
-
 @end

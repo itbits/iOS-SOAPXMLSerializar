@@ -2,6 +2,7 @@
 
 #import "EVESOAPService.h"
 #import "SOAPFault.h"
+#import "EVEKeyGenrator.h"
 
 #define kCharsetUTF8Value @"text/xml; charset=utf-8"
 #define kContentTypeHeader @"Content-Type"
@@ -18,13 +19,19 @@
 
 @implementation EVESOAPService
 
-- (id)initWithServiceURL:(NSString*)serviceURLString endPoint:(NSString *)paramEndPoint{
+- (id)initWithServiceURL:(NSString*)serviceURLString endPoint:(NSString *)paramEndPoint cacheMode:(EVEURLConnectionCacheMode)cacheMode{
     if (self = [super initWithRootUrl:kBaseServerURL serviceUrl:serviceURLString]) {
         url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseServerURL,serviceURLString]];
         endPoint = paramEndPoint;
+        self.cacheMode = cacheMode;
+        [self.connection setCacheMode:self.cacheMode];
     }
 
     return self;
+}
+
+- (void)setResponseCacheMode:(EVEURLConnectionCacheMode)cahceMode {
+    [self.connection setCacheMode:cahceMode];
 }
 
 - (NSString*)sopaRequestWithXMLBoday:(NSString *)xml {
@@ -40,38 +47,35 @@
 - (void)doSoapRequest:(NSString *)xml{
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     NSString *mesage = [self sopaRequestWithXMLBoday:xml];
-	NSString *msgLength = [NSString stringWithFormat:@"%d", [mesage length]];
+	NSString *msgLength = [NSString stringWithFormat:@"%lu", (unsigned long)[mesage length]];
 	[request addValue:kCharsetUTF8Value forHTTPHeaderField:kContentTypeHeader];
     [request addValue:endPoint forHTTPHeaderField: kSOAPActionHeader];
 	[request addValue: msgLength forHTTPHeaderField:kContentLengthHeader];
 	[request setHTTPMethod:kPOSTRequest];
 	[request setHTTPBody: [mesage dataUsingEncoding:NSUTF8StringEncoding]];
-    [self.connection invokeSOAPRequest:request method:kPOSTRequest queryString:nil content:nil];
+
+    NSURL *soapActionURL = [NSURL URLWithString:endPoint];
+
+    NSMutableString *cacheKey = [NSMutableString stringWithFormat:@"%@/%@",url, [[soapActionURL pathComponents] lastObject]];
+    /*
+     We need to make the cache keys unique for requests for getting data in chunks (Pagings etc..)
+     for this we are appending the XML contenet from current request in cache key. It will make our cache key unique for request with same URL, same Method and same Language. (XML content will be difrent for each request)
+     */
+    [cacheKey appendFormat:@"-%@",xml];
+
+    [self.connection invokeSOAPRequest:request cacheKey:[EVEKeyGenrator md5Key:cacheKey] queryString:nil];
 }
 
 #pragma mark CoreRESTService
 
-- (BOOL)isErrorResponse:(id)xmlObject {
-    if ([xmlObject respondsToSelector:@selector(isErrorResponse)]) {
-        return [(SOAPFault*)xmlObject isErrorResponse];
-    }
-    int statusCode = [[self.responseHeader objectForKey:@"statusCode"] intValue];// if the response has a status attribute
-    if (statusCode >=200 && statusCode < 230) {
-        return NO;
-    }
-    return YES;
-}
+- (void)didReceiveError:(EVEError *)error {
 
-- (void)didReceiveError:(id)xmlObject {
-    // grab the status object
-    //EventoStatus *status = (EventoStatus *)[xmlObject performSelector:@selector(status)];
-    int statusCode = [[self.responseHeader objectForKey:@"statusCode"] intValue];
     // check for a session timeout...
-    if (statusCode == 403) {
+    if (error.statusCode == 403) {
         // post a notification that the user's session timed out
         [[NSNotificationCenter defaultCenter] postNotificationName:kCommonSessionTimeout
                                                             object:nil];
-    } else if (statusCode == 400 || statusCode == 401 ) {
+    } else if (error.statusCode == 400 || error.statusCode == 401 ) {
         // post a notification that requested entuty not found
         [[NSNotificationCenter defaultCenter] postNotificationName:kAuthorizationFailureNotification
                                                             object:nil];
@@ -84,12 +88,5 @@
     }
 }
 
-#pragma mark CoreURLConnectionDelegate
-
-- (void)connection:(CoreURLConnection *)connection didFailWithError:(NSError *)error {
-	// post a notification that we can't reach the service
-	[[NSNotificationCenter defaultCenter] postNotificationName:kCommonUnableToAccessServices
-														object:nil];
-}
 
 @end

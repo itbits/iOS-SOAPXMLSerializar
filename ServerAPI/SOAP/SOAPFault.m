@@ -4,8 +4,4 @@
 
 @implementation SOAPFault
 
-- (BOOL)isErrorResponse {
-    return YES;
-}
-
 @end

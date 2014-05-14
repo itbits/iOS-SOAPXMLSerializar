@@ -332,7 +332,7 @@
     const char *cString = [xml cStringUsingEncoding:NSUTF8StringEncoding];
     
     // convert the XML document to an xmlDocPtr libxml2 reference
-    xmlDocPtr xmlDocument = xmlParseMemory(cString, strlen(cString));
+    xmlDocPtr xmlDocument = xmlParseMemory(cString, (int)strlen(cString));
     
     // get the root element
     xmlNodePtr node = xmlDocGetRootElement(xmlDocument);
@@ -354,7 +354,7 @@
     const char *cString = [xml cStringUsingEncoding:NSUTF8StringEncoding];
 
     // convert the XML document to an xmlDocPtr libxml2 reference
-    xmlDocPtr xmlDocument = xmlParseMemory(cString, strlen(cString));
+    xmlDocPtr xmlDocument = xmlParseMemory(cString, (int)strlen(cString));
     
     // get the root element
     xmlNodePtr node = xmlDocGetRootElement(xmlDocument);

@@ -1,6 +1,8 @@
-/*Created by Muhammad Imran on 4/6/14. */
+ /*Created by Muhammad Imran on 4/6/14. */
 
 #import "CoreURLConnection.h"
+#import "EventoServerAPIConstants.h"
+#import "EVEDataDownloadProgress.h"
 
 static NSMutableDictionary *globalCache;
 
@@ -32,43 +34,43 @@ static NSMutableDictionary *globalCache;
 
 - (id)initWithDelegate:(id<CoreURLConnectionDelegate>)d url:(NSString *)u {
     if ((self = [super init]) != nil) {
-        [self setCacheMode:EVEURLConnectionCacheModeNone];
         [self setDelegate:d];
         [self setUrl:u];
         [self setConnection:nil];
         [self setResponseData:nil];
-        [self setCacheMode:EVEURLConnectionCacheModeApplication];
-
-    }
+        [self setProgress:[[EVEDataDownloadProgress alloc] init]];
+}
     return (self);
 }
 
 #pragma mark CoreURLConnection
 
-- (NSMutableData *)cachedResponse:(NSData *)content {
+- (NSMutableData *)cachedResponse:(NSString *)key{
     switch (cacheMode) {
         case EVEURLConnectionCacheModeNone:
             // if we aren't caching anything, return nil
             return (nil);
-        case EVEURLConnectionCacheModeApplication: {
+        case EVEURLConnectionCacheModeMemory: {
             // get the service cache from the global cache
             if ([globalCache objectForKey:NSStringFromClass([self class])] == nil) {
                 [globalCache setObject:[NSMutableDictionary dictionary] forKey:NSStringFromClass([self class])];
             }
             NSMutableDictionary *globalServiceCache = [globalCache objectForKey:NSStringFromClass([self class])];
-            // create the cache key
-            NSString *cacheKey = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
             // see if we have a response cached for this request
-            NSMutableData *cachedResponse = [globalServiceCache objectForKey:cacheKey];
+            NSMutableData *cachedResponse = [globalServiceCache objectForKey:key];
             if (cachedResponse != nil) {
                 // if we have a response, return it
                 return (cachedResponse);
             } else {
                 // if not, setup the current response object to cache
-                [globalServiceCache setObject:responseData forKey:cacheKey];
+                [globalServiceCache setObject:responseData forKey:key];
                 // tell the caller we need to hit the server
                 return (nil);
             }
+        }
+        case EVEURLConnectionCacheModeDisk: {
+            //if we have response cached on disk retur it, if did not have response will reture NSMutable Data with 0 bits;
+            return [NSMutableData dataWithData:[EVECacheDiskHandler cachedDataFromDiskForKey:key]];
         }
         default:
             return (nil);
@@ -80,7 +82,7 @@ static NSMutableDictionary *globalCache;
         case EVEURLConnectionCacheModeNone:
             // if we aren't caching anything, don't do anything
             break;
-        case EVEURLConnectionCacheModeApplication:
+        case EVEURLConnectionCacheModeMemory:{
             // get the service cache from the global cache
             if ([globalCache objectForKey:NSStringFromClass([self class])] == nil) {
                 [globalCache setObject:[NSMutableDictionary dictionary] forKey:NSStringFromClass([self class])];
@@ -98,10 +100,18 @@ static NSMutableDictionary *globalCache;
                 [connectionCache removeObjectForKey:keyToPurge];
             }
             break;
+        }
+        case EVEURLConnectionCacheModeDisk: {
+            [EVECacheDiskHandler purgeDiskCacheForKey:self.cacheKey];
+        }
+
+            break;
     }
 }
 
-- (void)invokeSOAPRequest:(NSURLRequest*)soapRequest method:(NSString *)method queryString:(NSString *)query content:(NSData *)content{
+
+- (void)invokeSOAPRequest:(NSURLRequest*)soapRequest cacheKey:(NSString *)cacheKey queryString:(NSString *)query{
+    [self setCacheKey:cacheKey];
     // clear out our data cache, which will be as we receive data from the server.  in addition, if
     // we need to cache this particular request, then this will be the object that holds the
     // response.
@@ -110,15 +120,18 @@ static NSMutableDictionary *globalCache;
     // if we have a cached response for this request, use it.  since every connection instance is
     // tied to a unique URL, the only differences (as far as what we support) are what we send in
     // the content body of the post -- so that is what we key on.
-    NSMutableData *cache = [self cachedResponse:content];
-    if (cache != nil) {
+    NSMutableData *cache = [self cachedResponse:cacheKey];
+    if (cache != nil && [cache length]>0) {
         // save the cached response
-        [self setResponseData:cache];
+        //[self setResponseData:cache];
         // by default, all cached responses are buffered
         [self setResponseBuffered:YES];
         // handle the cached data.
-        [self connectionDidFinishLoading:connection];
-    } else {
+        [self handleCachedData:cache];
+        if (self.cacheMode == EVEURLConnectionCacheModeMemory) {
+            return;
+        }
+    }
         // concatenate the query and URL
         // We need to fix this, If we have to send some data in query stirng.
         NSString *urlAndQuery = self.url;
@@ -126,15 +139,27 @@ static NSMutableDictionary *globalCache;
             urlAndQuery = [NSString stringWithFormat:@"%@?%@", self.url, query];
         }
         // log the request
-        [self logRequest:method content:content];
+        //[self logRequest:method content:content];
         // begin loading the data
+    
         [self setConnection:[NSURLConnection connectionWithRequest:soapRequest delegate:self]];
         // tell the connection to begin
         [self.connection start];
         // mark the connection as active
         [self setConnectionActive:YES];
-    }
+    
 
+}
+
+- (void)handleCachedData:(NSData *)cachedData{
+    if (responseBuffered) {
+        // log the response if configured for it
+            [self logResponse];
+            // notify the retriever that we've retrieved our data
+            [self.delegate connection:self didDidReceiveCachedData:cachedData];
+        } else {
+            [self.delegate connection:self didFinishCachedStreaming:filePath];
+        }
 }
 
 - (BOOL)active {
@@ -177,11 +202,14 @@ static NSMutableDictionary *globalCache;
             break;
         }
     }
-    int statusCode = [((NSHTTPURLResponse *)response) statusCode];
+    NSInteger statusCode = [((NSHTTPURLResponse *)response) statusCode];
     // extract the headers and forward to whom registered
     NSDictionary *header = [(NSHTTPURLResponse *) response allHeaderFields];
     NSMutableDictionary *headerDic = [NSMutableDictionary dictionaryWithDictionary:header];
     [headerDic setObject:[NSNumber numberWithInteger:statusCode] forKey:@"statusCode"];
+
+    [self.progress setDataSize:[[headerDic valueForKey:@"Content-Length"] floatValue]];
+    
     if ([self.delegate respondsToSelector:@selector(connection:didReceiveResponseHeader:)]) {
         [self.delegate connection:self didReceiveResponseHeader:headerDic];
     }
@@ -204,6 +232,12 @@ static NSMutableDictionary *globalCache;
             [self.delegate connection:self hasDownloaded:[self.file offsetInFile]];
         }
     }
+    [self.progress setCurrentlyDownlaodedDataSize:(float)[self.responseData length]];
+
+    if ([self.delegate respondsToSelector:@selector(connection:didUpdateDownloadProgress:)]) {
+        [self.delegate connection:self didUpdateDownloadProgress:self.progress];
+    }
+
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)c {
@@ -218,6 +252,7 @@ static NSMutableDictionary *globalCache;
         [self logResponse];
         // notify the retriever that we've retrieved our data
         [self.delegate connection:self didReceiveData:[self responseData]];
+        [EVECacheDiskHandler saveResponseToDiskCache:[self responseData] forKey:self.cacheKey];
     } else {
         [self.delegate connection:self didFinishStreaming:filePath];
     }
@@ -230,31 +265,41 @@ static NSMutableDictionary *globalCache;
         return;
     }
     if ([self.delegate respondsToSelector:@selector(connection:didFailWithError:)]) {
+
 		[self.delegate connection:self didFailWithError:error];
 	}
     [self setConnectionActive:NO];
-    NSLog(@"Connection failed with error %@ %d", [error domain], [error code]);
+    NSLog(@"Connection failed with error %@ %ld", [error domain], (long)[error code]);
 }
 
 #pragma mark CoreURLConnection(Private)
 
 - (void)logRequest:(NSString *)method content:(NSData *)content {
-    NSLog(@"====================================================================================");
-    NSLog(@"Executing request for URL: %@ and method: %@", url, method);
-    if (content != nil) {
-        NSLog(@"Content: %@", [[NSString alloc] initWithData:content encoding:NSASCIIStringEncoding]);
+
+    if (kLogingEnabled) {
+        NSLog(@"====================================================================================");
+        NSLog(@"Executing request for URL: %@ and method: %@", url, method);
+        if (content != nil) {
+            NSLog(@"Content: %@", [[NSString alloc] initWithData:content encoding:NSASCIIStringEncoding]);
+        }
+        NSLog(@"====================================================================================");
+
     }
-    NSLog(@"====================================================================================");
-}
+   }
 
 - (void)logResponse {
-    NSLog(@"====================================================================================");
-    if ([responseData length] > 10240) {
-        NSLog(@"Connection returned over 10K of data; not logging");
-    } else {
-        NSLog(@"Connection returned data: %@", [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]);
+    NSLog(@"Connection returned data: %@", [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]);
+
+    if (kLogingEnabled) {
+       /* NSLog(@"====================================================================================");
+        if ([responseData length] > 10240) {
+            NSLog(@"Connection returned over 10K of data; not logging");
+        } else {
+            NSLog(@"Connection returned data: %@", [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]);
+        }
+        NSLog(@"====================================================================================");*/
     }
-    NSLog(@"====================================================================================");
+
 }
 
 @end

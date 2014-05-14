@@ -13,12 +13,15 @@
      */
     NSURL *url;
     /*!
+     @var
      @endPoint
      url
      @discussion
      endPoint holds the SOAP action URL for current SOAP request.
      */
     NSString *endPoint;
+
+    
 }
 
 /**
@@ -29,7 +32,7 @@
  *
 */
 
-- (id)initWithServiceURL:(NSString*)serviceURLString endPoint:(NSString *)paramEndPoint;
+- (id)initWithServiceURL:(NSString*)serviceURLString endPoint:(NSString *)paramEndPoint cacheMode:(EVEURLConnectionCacheMode)cacheMode;
 /**
  *	calls the webservice at specific end point, mentioned in param. grabs the response and
  *  returns to called method.
@@ -38,6 +41,6 @@
  */
 - (void)doSoapRequest:(NSString *)xml;
 
-
+- (void)setResponseCacheMode:(EVEURLConnectionCacheMode)cahceMode;
 
 @end
