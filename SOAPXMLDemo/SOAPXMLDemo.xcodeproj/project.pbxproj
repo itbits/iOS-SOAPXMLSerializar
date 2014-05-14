@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7AB22921923922E00EB0500 /* EVECacheDiskHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D7AB228F1923922E00EB0500 /* EVECacheDiskHandler.m */; };
+		D7AB22931923922E00EB0500 /* EVEKeyGenrator.m in Sources */ = {isa = PBXBuildFile; fileRef = D7AB22911923922E00EB0500 /* EVEKeyGenrator.m */; };
+		D7AB22981923924E00EB0500 /* EVEDataDownloadProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D7AB22951923924E00EB0500 /* EVEDataDownloadProgress.m */; };
+		D7AB22991923924E00EB0500 /* EVEError.m in Sources */ = {isa = PBXBuildFile; fileRef = D7AB22971923924E00EB0500 /* EVEError.m */; };
 		D7C0646F19053AE300E82F7C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C0646E19053AE300E82F7C /* Foundation.framework */; };
 		D7C0647119053AE300E82F7C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C0647019053AE300E82F7C /* CoreGraphics.framework */; };
 		D7C0647319053AE300E82F7C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C0647219053AE300E82F7C /* UIKit.framework */; };
@@ -45,6 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D7AB228E1923922E00EB0500 /* EVECacheDiskHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVECacheDiskHandler.h; sourceTree = "<group>"; };
+		D7AB228F1923922E00EB0500 /* EVECacheDiskHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVECacheDiskHandler.m; sourceTree = "<group>"; };
+		D7AB22901923922E00EB0500 /* EVEKeyGenrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVEKeyGenrator.h; sourceTree = "<group>"; };
+		D7AB22911923922E00EB0500 /* EVEKeyGenrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVEKeyGenrator.m; sourceTree = "<group>"; };
+		D7AB22941923924E00EB0500 /* EVEDataDownloadProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVEDataDownloadProgress.h; sourceTree = "<group>"; };
+		D7AB22951923924E00EB0500 /* EVEDataDownloadProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVEDataDownloadProgress.m; sourceTree = "<group>"; };
+		D7AB22961923924E00EB0500 /* EVEError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVEError.h; sourceTree = "<group>"; };
+		D7AB22971923924E00EB0500 /* EVEError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVEError.m; sourceTree = "<group>"; };
 		D7C0646B19053AE300E82F7C /* SOAPXMLDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SOAPXMLDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7C0646E19053AE300E82F7C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D7C0647019053AE300E82F7C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -112,6 +124,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D7AB228D1923922E00EB0500 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				D7AB228E1923922E00EB0500 /* EVECacheDiskHandler.h */,
+				D7AB228F1923922E00EB0500 /* EVECacheDiskHandler.m */,
+				D7AB22901923922E00EB0500 /* EVEKeyGenrator.h */,
+				D7AB22911923922E00EB0500 /* EVEKeyGenrator.m */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		D7C0646219053AE300E82F7C = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +221,7 @@
 		D7C064A119053B1700E82F7C /* ServerAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D7AB228D1923922E00EB0500 /* Cache */,
 				D7C064A219053B1700E82F7C /* SOAP */,
 				D7C064AC19053B1700E82F7C /* XMLParser */,
 			);
@@ -207,6 +231,10 @@
 		D7C064A219053B1700E82F7C /* SOAP */ = {
 			isa = PBXGroup;
 			children = (
+				D7AB22941923924E00EB0500 /* EVEDataDownloadProgress.h */,
+				D7AB22951923924E00EB0500 /* EVEDataDownloadProgress.m */,
+				D7AB22961923924E00EB0500 /* EVEError.h */,
+				D7AB22971923924E00EB0500 /* EVEError.m */,
 				D7C064A319053B1700E82F7C /* CoreURLConnection.h */,
 				D7C064A419053B1700E82F7C /* CoreURLConnection.m */,
 				D7C064A519053B1700E82F7C /* CoreWebService.h */,
@@ -340,14 +368,18 @@
 				D7C0647F19053AE400E82F7C /* AppDelegate.m in Sources */,
 				D7C064BD19053B1700E82F7C /* CoreURLConnection.m in Sources */,
 				D7C064C719053B1700E82F7C /* XMLUnmarshaller.m in Sources */,
+				D7AB22931923922E00EB0500 /* EVEKeyGenrator.m in Sources */,
 				D7C064C319053B1700E82F7C /* XMLContextConfiguration.m in Sources */,
 				D7C064C519053B1700E82F7C /* XMLMarshaller.m in Sources */,
 				D7C0647B19053AE400E82F7C /* main.m in Sources */,
+				D7AB22981923924E00EB0500 /* EVEDataDownloadProgress.m in Sources */,
+				D7AB22921923922E00EB0500 /* EVECacheDiskHandler.m in Sources */,
 				D7C064C619053B1700E82F7C /* XMLTypeMapper.m in Sources */,
 				D7C064C219053B1700E82F7C /* XMLContext.m in Sources */,
 				D7C064BF19053B1700E82F7C /* EVESOAPService.m in Sources */,
 				D7C064BE19053B1700E82F7C /* CoreWebService.m in Sources */,
 				D7C064C019053B1700E82F7C /* SOAPFault.m in Sources */,
+				D7AB22991923924E00EB0500 /* EVEError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,6 +580,7 @@
 				D7C0649919053AE400E82F7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D7C0649A19053AE400E82F7C /* Build configuration list for PBXNativeTarget "SOAPXMLDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +589,7 @@
 				D7C0649C19053AE400E82F7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
